@@ -1,6 +1,6 @@
 {
   "name": "@alanvncs/tarefy-mcp",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Servidor MCP para o Tarefy — expõe tarefas e conversas para agentes de IA",
   "type": "module",
   "module": "src/index.ts",
