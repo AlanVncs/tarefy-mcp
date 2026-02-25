@@ -1,0 +1,81 @@
+import { describe, expect, it, mock } from "bun:test";
+
+mock.module("../auth/token-store.js", () => ({
+  loadToken: () => Promise.resolve("fake-token"),
+}));
+
+const { runGetTask } = await import("./get-task.js");
+
+const taskPayload = {
+  id: 100,
+  title: "Task teste",
+  status: "open",
+};
+const commentsPayload = [{ id: 1, body: "Comentário interno" }];
+const publicCommentsPayload = [{ id: 2, body: "Comentário público" }];
+
+describe("runGetTask", () => {
+  it("retorna JSON com task, comments e publicComments quando sem prompt", async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = (input: RequestInfo | URL) => {
+      const url = typeof input === "string" ? input : input.toString();
+      if (url.includes("/nodeapi/v2/tasks/")) {
+        return Promise.resolve(
+          new Response(JSON.stringify(taskPayload), { status: 200 })
+        );
+      }
+      if (
+        url.includes("/nodeapi/task/comments?id=") &&
+        !url.includes("/client")
+      ) {
+        return Promise.resolve(
+          new Response(JSON.stringify(commentsPayload), { status: 200 })
+        );
+      }
+      if (url.includes("/nodeapi/task/comments/client?")) {
+        return Promise.resolve(
+          new Response(JSON.stringify(publicCommentsPayload), { status: 200 })
+        );
+      }
+      return Promise.resolve(new Response("{}", { status: 404 }));
+    };
+
+    try {
+      const result = await runGetTask({ taskId: "42" });
+      const parsed = JSON.parse(result);
+      expect(parsed.task).toEqual(taskPayload);
+      expect(parsed.comments).toEqual(commentsPayload);
+      expect(parsed.publicComments).toEqual(publicCommentsPayload);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it("inclui instruções do prompt quando informado", async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = (input: RequestInfo | URL) => {
+      const url = typeof input === "string" ? input : input.toString();
+      if (url.includes("/nodeapi/v2/tasks/")) {
+        return Promise.resolve(
+          new Response(JSON.stringify({ id: 100, title: "T" }), { status: 200 })
+        );
+      }
+      if (url.includes("/nodeapi/task/comments")) {
+        return Promise.resolve(new Response("[]", { status: 200 }));
+      }
+      return Promise.resolve(new Response("{}", { status: 404 }));
+    };
+
+    try {
+      const result = await runGetTask({
+        taskId: "42",
+        prompt: "Resuma em uma frase",
+      });
+      expect(result).toContain("Instruções (prompt):");
+      expect(result).toContain("Resuma em uma frase");
+      expect(result).toContain("Dados (JSON):");
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});

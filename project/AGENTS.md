@@ -1,19 +1,40 @@
 # Agente de desenvolvimento do servidor MCP para Tarefy
 
+## Papel desta documentação (seed do projeto)
+
+**AGENTS.md** e **MCP-SPEC.md** formam o **seed do projeto**: com base neles o projeto pode ser gerado do zero. A cada alteração no projeto, atualize estes dois arquivos de forma coerente.
+
+O funcionamento do servidor MCP está descrito em **[MCP-SPEC.md](./MCP-SPEC.md)**.
+
+---
+
 ## Papel do agente
 
 O agente é responsável por atender as solicitações de desenvolvimento, seguindo as diretivas aqui estabelecidas e as melhores práticas de desenvolvimento.
 
-O funcionamento do servidor MCP está descrito em **[MCP-SPEC.md](./MCP-SPEC.md)**.
+---
 
 ## Diretivas de desenvolvimento
 
-- Gerar workflows de publicação do pacote no npm (`@alanvncs/tarefy-mcp`).
+- Gerar workflows de publicação do pacote no npm (`@alanvncs/tarefy-mcp`). A publicação deve usar **Trusted Publishing** (OIDC), sem token de longa duração; ver [npm Trusted Publishers](https://docs.npmjs.com/trusted-publishers).
 - Formatação e lint com **Prettier** e **ESLint** (apenas regras do Prettier para formatação).
 - Gerar testes unitários com foco principal nas **tools** do MCP.
 - Ao final do que foi solicitado, quando pertinente, rodar testes ou orientar o usuário a fazê-lo (mostrando como).
-- Manter a documentação do projeto em um **README.md** na raiz do repositório.
-- Conforme alterações no projeto, atualizar também este arquivo de forma coerente com o que foi feito.
+- Manter a documentação do projeto em um **README.md** na raiz do repositório. O README deve ser **autossuficiente**: o usuário não deve precisar acessar outros arquivos para instalar, usar as ferramentas ou entender a API (exceto quando realmente necessário).
+- **A cada alteração no projeto**, atualizar **AGENTS.md** e **MCP-SPEC.md** de forma coerente.
+
+---
+
+## Estado do projeto (gerado conforme esta especificação)
+
+- Servidor MCP com **stdio**, tools `login` (Playwright + cookie) e `get-task` (API Tarefy).
+- Token salvo em `~/.tarefy-mcp/token.txt`.
+- Workflows: **CI** (lint, format check, build, test) e **Publish to npm** (em release ou manual) usando **Trusted Publishing** (OIDC); permissões `id-token: write` e `contents: read`; sem `NPM_TOKEN`.
+- Testes unitários para `token-store`, API Tarefy e tool `get-task`.
+- Prettier + ESLint (config Prettier); TypeScript com `tsconfig.json`.
+- **README.md** na raiz **autossuficiente**: contém instalação do MCP, descrição das ferramentas, API do Tarefy (headers e endpoints) e comandos de desenvolvimento, sem exigir leitura de outros arquivos.
+
+---
 
 ## Stack de tecnologias
 
@@ -23,4 +44,4 @@ O funcionamento do servidor MCP está descrito em **[MCP-SPEC.md](./MCP-SPEC.md)
 - **Playwright**
 - **Cursor**
 
-*(Não é obrigatório usar todos; escolher conforme a necessidade.)*
+_(Não é obrigatório usar todos; escolher conforme a necessidade.)_
