@@ -62,4 +62,6 @@ execSync("git add package.json", { cwd: root, stdio: "inherit" });
 execSync(`git commit -m "${tag}"`, { cwd: root, stdio: "inherit" });
 execSync(`git tag ${tag}`, { cwd: root, stdio: "inherit" });
 
-console.log(`Release ${tag} criado (commit + tag). Rode \`git push --follow-tags\` para enviar.`);
+console.log(
+  `Release ${tag} criado (commit + tag). O comando release fará push do branch e das tags em seguida.`
+);
