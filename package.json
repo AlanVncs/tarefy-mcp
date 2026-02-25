@@ -11,6 +11,8 @@
     "build": "tsc",
     "start": "node build/index.js",
     "dev": "bun run src/index.ts",
+    "inspector": "bun run build && npx -y @modelcontextprotocol/inspector node build/index.js",
+    "release": "bash scripts/release.sh",
     "lint": "eslint src --max-warnings 0",
     "lint:fix": "eslint src --fix",
     "format": "prettier --write \"src/**/*.ts\" \"project/**/*.md\"",

@@ -33,6 +33,8 @@ O agente é responsável por atender as solicitações de desenvolvimento, segui
 - Testes unitários para `token-store`, API Tarefy e tool `get-task`.
 - Prettier + ESLint (config Prettier); TypeScript com `tsconfig.json`.
 - **README.md** na raiz **autossuficiente**: contém instalação do MCP, descrição das ferramentas, API do Tarefy (headers e endpoints) e comandos de desenvolvimento, sem exigir leitura de outros arquivos.
+- Script **`inspector`**: testar o servidor com MCP Inspector (`bun run inspector` → build + `npx @modelcontextprotocol/inspector node build/index.js`).
+- Script **`release`**: criar release e push no GitHub (`bun run release` = patch; `bun run release -- minor|major`); exige GitHub CLI (`gh`); faz bump da versão, `git push --follow-tags` e `gh release create`.
 
 ---
 

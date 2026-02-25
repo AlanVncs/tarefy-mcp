@@ -100,13 +100,14 @@ O `<token>` é o valor do cookie `tarefy` obtido após o login (salvo em `~/.tar
 | `bun run build`  | Compilar TypeScript → `build/`     |
 | `bun run start`  | Rodar o servidor (`node build/index.js`) |
 | `bun run dev`    | Rodar sem build (`bun run src/index.ts`) |
+| `bun run inspector` | Testar o servidor com [MCP Inspector](https://modelcontextprotocol.io/legacy/tools/inspector) (build + UI em `http://localhost:6274`) |
 | `bun test`       | Testes unitários                   |
 | `bun run lint`   | ESLint                             |
 | `bun run format` | Prettier (formatação)              |
 
 O binário publicado no npm é `build/index.js` (uso com `npx` ou como `tarefy-mcp` após instalação global).
 
-**Publicação no npm:** o workflow do GitHub usa [Trusted Publishing](https://docs.npmjs.com/trusted-publishers) (OIDC); não é necessário configurar `NPM_TOKEN`. É preciso registrar o Trusted Publisher uma vez em npmjs.com → Package → Settings → Trusted publishing (repositório e nome do workflow: `publish-npm.yml`).
+**Publicação no npm:** o workflow do GitHub usa [Trusted Publishing](https://docs.npmjs.com/trusted-publishers) (OIDC); não é necessário configurar `NPM_TOKEN`. É preciso registrar o Trusted Publisher uma vez em npmjs.com → Package → Settings → Trusted publishing (repositório e nome do workflow: `publish-npm.yml`). Para criar um release e dar push no GitHub (dispara o workflow): `bun run release` (bump **patch**) ou `bun run release -- minor` / `bun run release -- major`. Requer [GitHub CLI](https://cli.github.com/) (`gh`) instalado e autenticado.
 
 ---
 
