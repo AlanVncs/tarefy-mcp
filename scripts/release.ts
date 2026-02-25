@@ -61,9 +61,5 @@ const tag = `v${nextVersion}`;
 execSync("git add package.json", { cwd: root, stdio: "inherit" });
 execSync(`git commit -m "${tag}"`, { cwd: root, stdio: "inherit" });
 execSync(`git tag ${tag}`, { cwd: root, stdio: "inherit" });
-execSync("git push origin HEAD", { cwd: root, stdio: "inherit" });
-execSync(`git push origin ${tag}`, { cwd: root, stdio: "inherit" });
 
-console.log(
-  `Release ${tag} criado e enviado. O workflow de publicação será disparado pelo push da tag.`
-);
+console.log(`Release ${tag} criado (commit + tag). Rode \`git push --follow-tags\` para enviar.`);
