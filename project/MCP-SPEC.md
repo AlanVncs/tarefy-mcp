@@ -88,8 +88,8 @@ Em `~/cursor/mcp.json` (ou equivalente):
 
 **Inputs**
 
-| Nome   | Tipo    | Descrição |
-|--------|---------|-----------|
+| Nome    | Tipo     | Descrição                                                                  |
+| ------- | -------- | -------------------------------------------------------------------------- |
 | `email` | opcional | Email do usuário; se informado, é preenchido automaticamente no navegador. |
 
 **Funcionamento**
@@ -104,8 +104,8 @@ Em `~/cursor/mcp.json` (ou equivalente):
 
 **Inputs**
 
-| Nome    | Tipo    | Descrição |
-|---------|---------|-----------|
+| Nome     | Tipo     | Descrição                                                                                                                |
+| -------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `prompt` | opcional | Instruções sobre o formato/conteúdo da resposta (quais dados incluir, formato etc.). Se omitido, retorna todos os dados. |
 
 **Funcionamento**

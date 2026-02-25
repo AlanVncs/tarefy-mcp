@@ -15,8 +15,8 @@
     "release": "bash scripts/release.sh",
     "lint": "eslint src --max-warnings 0",
     "lint:fix": "eslint src --fix",
-    "format": "prettier --write \"src/**/*.ts\" \"project/**/*.md\"",
-    "format:check": "prettier --check \"src/**/*.ts\" \"project/**/*.md\"",
+    "fmt": "prettier --write \"src/**/*.ts\" \"project/**/*.md\"",
+    "fmt:check": "prettier --check \"src/**/*.ts\" \"project/**/*.md\"",
     "test": "bun test",
     "prepare": "bun run build"
   },

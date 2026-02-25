@@ -7,7 +7,7 @@ Esta pasta contém a documentação de contexto e diretivas do projeto **@alanvn
 | Documento                    | Descrição                                                             |
 | ---------------------------- | --------------------------------------------------------------------- |
 | [AGENTS.md](./AGENTS.md)     | Diretivas para o agente de desenvolvimento: papel, regras e stack.    |
-| [MCP-SPEC.md](./MCP-SPEC.md) | Especificação do servidor MCP: Tarefy, API, instalação e ferramentas.  |
+| [MCP-SPEC.md](./MCP-SPEC.md) | Especificação do servidor MCP: Tarefy, API, instalação e ferramentas. |
 
 ## Uso
 
