@@ -29,7 +29,7 @@ O agente é responsável por atender as solicitações de desenvolvimento, segui
 
 - Servidor MCP com **stdio**, tools `login` (Playwright + cookie) e `get-task` (API Tarefy).
 - Token salvo em `~/.tarefy-mcp/token.txt`.
-- Workflows: **CI** (build, test) e **Publish to npm** (em **push de tags** `v*` ou workflow_dispatch) usando **Trusted Publishing** (OIDC); permissões `id-token: write` e `contents: read`; sem `NPM_TOKEN`.
+- Workflows: **Publish to npm** (em push de tags `v*` ou workflow_dispatch): install, build, **test**, publish via Trusted Publishing (OIDC); permissões `id-token: write` e `contents: read`; sem `NPM_TOKEN`.
 - Testes unitários para `token-store`, API Tarefy e tool `get-task`.
 - Prettier + ESLint (config Prettier); TypeScript com `tsconfig.json`.
 - **README.md** na raiz **autossuficiente**: contém instalação do MCP, descrição das ferramentas, API do Tarefy (headers e endpoints) e comandos de desenvolvimento, sem exigir leitura de outros arquivos.
