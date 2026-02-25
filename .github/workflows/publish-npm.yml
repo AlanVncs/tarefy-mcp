@@ -1,3 +1,6 @@
+# Publica no npm em push de tags v* (e via workflow_dispatch).
+# Usa Trusted Publisher (OIDC) — https://docs.npmjs.com/trusted-publishers
+# No npmjs.com configure Trusted Publisher para o pacote @alanvncs/tarefy-mcp.
 name: Publish to npm
 
 on:
@@ -6,20 +9,24 @@ on:
       - "v*"
   workflow_dispatch:
 
-permissions:
-  id-token: write   # Obrigatório para OIDC (Trusted Publishing)
-  contents: read
-
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -30,11 +37,5 @@ jobs:
       - name: Test
         run: bun test
 
-      - name: Publish to npm (Trusted Publishing / OIDC)
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          registry-url: "https://registry.npmjs.org"
-      - run: npm publish --access public
-        # Sem NODE_AUTH_TOKEN: autenticação via OIDC (Trusted Publishing).
-        # Dispara apenas em push de tags v* (ex.: v0.1.2) ou manualmente (workflow_dispatch).
+      - name: Publish @alanvncs/tarefy-mcp
+        run: npm publish --access public
