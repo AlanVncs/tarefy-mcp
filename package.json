@@ -5,7 +5,7 @@
   "type": "module",
   "module": "src/index.ts",
   "bin": {
-    "tarefy-mcp": "./build/index.js"
+    "tarefy-mcp": "build/index.js"
   },
   "scripts": {
     "build": "tsc",
