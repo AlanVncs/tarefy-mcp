@@ -1,6 +1,7 @@
 # Publica no npm em push de tags v* (e via workflow_dispatch).
-# Usa Trusted Publisher (OIDC) — https://docs.npmjs.com/trusted-publishers
-# No npmjs.com configure Trusted Publisher para o pacote @alanvncs/tarefy-mcp.
+# Autenticação somente por Trusted Publisher (OIDC) — https://docs.npmjs.com/trusted-publishers
+# Configure em npmjs.com → Package @alanvncs/tarefy-mcp → Settings → Trusted publishing:
+# repositório e workflow filename "publish-npm.yml".
 name: Publish to npm
 
 on:
@@ -38,4 +39,4 @@ jobs:
         run: bun test
 
       - name: Publish @alanvncs/tarefy-mcp
-        run: npm publish --access public
+        run: npm publish
